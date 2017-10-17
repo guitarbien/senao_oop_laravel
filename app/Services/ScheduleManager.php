@@ -7,12 +7,19 @@ class ScheduleManager extends ArrayLike
     /** @var array */
     private $schedules;
 
-    public function count()
+    /**
+     * 取得 $schedules 的數量
+     * @return int
+     */
+    public function count(): int
     {
         return count($this->schedules);
     }
 
-    public function processSchedules()
+    /**
+     * 將 schedule.json 轉成 $schedules，每個元素都是 Schedule
+     */
+    public function processSchedules(): void
     {
         $scheduleJson = $this->getScheduleJson();
 
@@ -23,7 +30,10 @@ class ScheduleManager extends ArrayLike
         $this->resetSchedules();
     }
 
-    private function resetSchedules()
+    /**
+     * 實作 ArrayAccess，將整理好的 $schedules 放入上層的 container
+     */
+    private function resetSchedules(): void
     {
         $this->setContainer($this->schedules);
     }
