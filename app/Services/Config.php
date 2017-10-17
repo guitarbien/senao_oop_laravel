@@ -32,6 +32,23 @@ class Config
     private $connectionString;
 
     /**
+     * Config constructor.
+     * @param array $config
+     */
+    public function __construct(array $config) {
+        $this->ext              = $config['ext'];
+        $this->location         = $config['location'];
+        $this->subDirectory     = $config['subDirectory'];
+        $this->unit             = $config['unit'];
+        $this->remove           = $config['remove'];
+        $this->handler          = $config['handler'];
+        $this->destination      = $config['destination'];
+        $this->dir              = $config['dir'];
+        $this->connectionString = $config['connectionString'];
+    }
+
+
+    /**
      * @return string
      */
     public function getExt(): string

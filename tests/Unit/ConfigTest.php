@@ -9,7 +9,18 @@ class ConfigTest extends TestCase
 {
     public function test_Config_class基本屬性()
     {
-        $config = new Config;
+        $input = [
+            'ext'              => '',
+            'location'         => '',
+            'subDirectory'     => '',
+            'unit'             => '',
+            'remove'           => '',
+            'handler'          => '',
+            'destination'      => '',
+            'dir'              => '',
+            'connectionString' => '',
+        ];
+        $config = new Config($input);
 
         // assert for the fields
         $this->assertObjectHasAttribute('ext', $config);
