@@ -14,6 +14,17 @@ class Schedule
     private $time;
 
     /**
+     * Schedule constructor.
+     * @param array $schedule
+     */
+    public function __construct(array $schedule)
+    {
+        $this->ext      = $schedule['ext'];
+        $this->interval = $schedule['interval'];
+        $this->time     = $schedule['time'];
+    }
+
+    /**
      * @return string
      */
     public function getExt(): string
