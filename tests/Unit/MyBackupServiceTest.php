@@ -2,22 +2,18 @@
 
 namespace Tests\Unit;
 
-use App\Services\ConfigManager;
-use App\Services\ScheduleManager;
 use Tests\TestCase;
 use App\Services\MyBackupService;
 
 class MyBackupServiceTest extends TestCase
 {
-    public function test_可以執行ProcessJSONConfig和DoBackup()
+    public function test_可以執行ProcessJsonConfig和DoBackup()
     {
-        $configManager   = new ConfigManager;
-        $scheduleManager = new ScheduleManager;
+        $myBackupService = new MyBackupService;
+        $myBackupService->processJsonConfigs();
 
-        $myBackupService = new MyBackupService($configManager, $scheduleManager);
-        $myBackupService->processJSONConfig();
-        $myBackupService->doBackup();
-
+        // 尚未實作備份 故還沒有東西可以 assert
+        // 以此 test 當作使用端來測試
         $this->assertTrue(true);
     }
 }

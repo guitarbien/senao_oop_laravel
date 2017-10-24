@@ -24,8 +24,4 @@ class MyBackupService
             $manager->processJsonConfig();
         }
     }
-
-    public function doBackup()
-    {
-    }
 }
