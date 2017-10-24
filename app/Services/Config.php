@@ -13,7 +13,7 @@ class Config
     /** @var bool 是否處理子目錄 */
     private $subDirectory;
 
-    /** @var string 備份單位 fiel:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
+    /** @var string 備份單位 field:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
     private $unit;
 
     /** @var bool 處理為是否刪除檔案 */
