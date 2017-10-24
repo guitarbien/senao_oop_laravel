@@ -16,6 +16,9 @@ class MyBackupService
         $this->managers[] = new ScheduleManager;
     }
 
+    /**
+     * 執行所有 manager 各自的 processJsonConfig()
+     */
     public function processJsonConfigs(): void
     {
         foreach ($this->managers as $manager) {
