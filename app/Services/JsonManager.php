@@ -10,23 +10,10 @@ abstract class JsonManager extends ArrayLike
      * @var Config[] | Schedule[]
      * 經 resetConfigs() 將讀取到的 Config 或 Schedule 的陣列存回此變數
      */
-    private $configs;
+    protected $configs;
 
     /** string 設定檔檔名 此處不設定值，由 child class 提供實際檔案名稱 */
     const SETTING_FILE = '';
-
-    /** @var JsonManager */
-    private $instance;
-
-    /**
-     * JsonManager constructor.
-     * 存放目前實際的 instance
-     * @param JsonManager $manager
-     */
-    public function __construct(JsonManager $manager)
-    {
-        $this->instance = $manager;
-    }
 
     /**
      * 回傳目前 instance 的 config 數量
@@ -34,7 +21,7 @@ abstract class JsonManager extends ArrayLike
      */
     public function count(): int
     {
-        return count($this->instance->configs);
+        return count($this->configs);
     }
 
     /**
