@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ScheduleManager extends ArrayLike
 {
+    const SETING_FILE = 'schedule.json';
+
     /** @var array */
     private $schedules;
 
@@ -23,7 +25,7 @@ class ScheduleManager extends ArrayLike
      */
     public function processSchedules(): void
     {
-        $scheduleJson = $this->getScheduleJson();
+        $scheduleJson = json_decode(Storage::get(static::SETING_FILE), true);
 
         foreach ($scheduleJson['schedules'] as $each) {
             $this->schedules[] = new Schedule($each);
@@ -38,15 +40,5 @@ class ScheduleManager extends ArrayLike
     private function resetSchedules(): void
     {
         $this->setContainer($this->schedules);
-    }
-
-    /**
-     * 讀取 schedule.json
-     * @return array
-     */
-    private function getScheduleJson(): array
-    {
-        $contents = Storage::get('schedule.json');
-        return json_decode($contents, true);
     }
 }

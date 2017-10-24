@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ConfigManager extends ArrayLike
 {
+    const SETTING_FILE = 'config.json';
+
     /** @var array */
     private $configs;
 
@@ -23,7 +25,7 @@ class ConfigManager extends ArrayLike
      */
     public function processConfigs(): void
     {
-        $scheduleJson = $this->getConfigJson();
+        $scheduleJson = json_decode(Storage::get(static::SETTING_FILE), true);
 
         foreach ($scheduleJson['configs'] as $each) {
             $this->configs[] = new Config($each);
@@ -38,15 +40,5 @@ class ConfigManager extends ArrayLike
     private function resetSchedules(): void
     {
         $this->setContainer($this->configs);
-    }
-
-    /**
-     * 讀取 config.json
-     * @return array
-     */
-    private function getConfigJson(): array
-    {
-        $contents = Storage::get('config.json');
-        return json_decode($contents, true);
     }
 }
