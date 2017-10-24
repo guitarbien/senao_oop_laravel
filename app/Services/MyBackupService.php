@@ -4,11 +4,8 @@ namespace App\Services;
 
 class MyBackupService
 {
-    /** @var ConfigManager */
-    private $configManager;
-
-    /** @var ScheduleManager */
-    private $scheduleManager;
+    /** @var ConfigManager[] 存放各種 Manager 的陣列 */
+    private $managers = [];
 
     /**
      * MyBackupService constructor.
@@ -17,14 +14,15 @@ class MyBackupService
      */
     public function __construct(ConfigManager $configManager, ScheduleManager $scheduleManager)
     {
-        $this->configManager   = $configManager;
-        $this->scheduleManager = $scheduleManager;
+        $this->managers[] = $configManager;
+        $this->managers[] = $scheduleManager;
     }
 
-    public function processJSONConfig()
+    public function processJSONConfigs()
     {
-        $this->configManager->processConfigs();
-        $this->scheduleManager->processSchedules();
+        foreach ($this->managers as $manager) {
+            $manager->processJsonConfig();
+        }
     }
 
     public function doBackup()
