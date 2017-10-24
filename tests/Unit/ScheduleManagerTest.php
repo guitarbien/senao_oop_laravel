@@ -23,7 +23,7 @@ class ScheduleManagerTest extends TestCase
     {
         $scheduleManager = new ScheduleManager;
 
-        $this->assertObjectHasAttribute('schedules', $scheduleManager);
+        $this->assertObjectHasAttribute('configs', $scheduleManager);
     }
 
     public function test_ScheduleManager可以用count取得目前存有幾個schedules()

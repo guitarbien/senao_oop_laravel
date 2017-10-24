@@ -15,13 +15,26 @@ abstract class JsonManager extends ArrayLike
     /** string 設定檔檔名 此處不設定值，由 child class 提供實際檔案名稱 */
     const SETTING_FILE = '';
 
+    /** @var JsonManager */
+    private $instance;
+
     /**
-     * 取得 $schedules 的數量
+     * JsonManager constructor.
+     * 存放目前實際的 instance
+     * @param JsonManager $manager
+     */
+    public function __construct(JsonManager $manager)
+    {
+        $this->instance = $manager;
+    }
+
+    /**
+     * 回傳目前 instance 的 config 數量
      * @return int
      */
     public function count(): int
     {
-        return count($this->configs);
+        return count($this->instance->configs);
     }
 
     /**
