@@ -2,26 +2,25 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Storage;
-
 class ConfigManager extends JsonManager
 {
-    /** @var array */
+    /** @var Config[] */
     private $configs;
 
+    /** config file name */
     const SETTING_FILE = 'config.json';
 
     /**
-     * 將 schedule.json 轉成 $schedules，每個元素都是 Schedule
+     * 將 config.json 轉成 $config，每個元素都是 Config
      */
-    public function processConfig(): void
+    public function processJsonConfig(): void
     {
-        $scheduleJson = json_decode(Storage::get(static::SETTING_FILE), true);
+        $configJson = $this->getJsonObject();
 
-        foreach ($scheduleJson['configs'] as $each) {
+        foreach ($configJson['configs'] as $each) {
             $this->configs[] = new Config($each);
         }
 
-        $this->resetSchedules();
+        $this->resetConfigs($this->configs);
     }
 }
