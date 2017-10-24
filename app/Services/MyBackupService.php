@@ -9,11 +9,13 @@ class MyBackupService
 
     /**
      * MyBackupService constructor.
+     * @param ConfigManager $configManager
+     * @param ScheduleManager $scheduleManager
      */
-    public function __construct()
+    public function __construct(ConfigManager $configManager, ScheduleManager $scheduleManager)
     {
-        $this->managers[] = new ConfigManager;
-        $this->managers[] = new ScheduleManager;
+        $this->managers[] = $configManager;
+        $this->managers[] = $scheduleManager;
     }
 
     /**

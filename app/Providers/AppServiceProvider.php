@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\ConfigManager;
+use App\Services\ScheduleManager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ConfigManager::class, function () {
+            return new ConfigManager;
+        });
+
+        $this->app->bind(ScheduleManager::class, function () {
+            return new ScheduleManager;
+        });
     }
 }
