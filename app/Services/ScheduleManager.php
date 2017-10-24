@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class ScheduleManager extends ArrayLike
 {
     /** @var array */
@@ -39,12 +41,12 @@ class ScheduleManager extends ArrayLike
     }
 
     /**
-     * 還不清楚 schedule.json 是由 construct 傳入還是讀取固定路徑的檔案
-     * 先寫死假資料
+     * 讀取 schedule.json
      * @return array
      */
     private function getScheduleJson(): array
     {
-        return json_decode('{"schedules": [{"ext": "cs","time": "12:00","interval": "Everyday"},{"ext": "docx","time": "20:00","interval": "Everyday"},{"ext": "jpg","time": "7:00","interval": "Monday"}]}', true);
+        $contents = Storage::get('schedule.json');
+        return json_decode($contents, true);
     }
 }

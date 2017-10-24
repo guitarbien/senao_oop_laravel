@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class ConfigManager extends ArrayLike
 {
     /** @var array */
@@ -39,12 +41,12 @@ class ConfigManager extends ArrayLike
     }
 
     /**
-     * 還不清楚 schedule.json 是由 construct 傳入還是讀取固定路徑的檔案
-     * 先寫死假資料
+     * 讀取 config.json
      * @return array
      */
     private function getConfigJson(): array
     {
-        return json_decode('{"configs":[{"ext":"cs","location":"c:\\\\Projects","subDirectory":true,"unit":"file","remove":false,"handler":"zip","destination":"directory","dir":"c:\\\\MyArchieves","connectionString":""},{"ext":"DOCX","location":"c:\\\\Documents","subDirectory":true,"unit":"file","remove":false,"handler":"encode","destination":"db","dir":"","connectionString":"MyConnectionString"},{"ext":"jpg","location":"c:\\\\Pictures","subDirectory":true,"unit":"file","remove":false,"handler":"","destination":"directory","dir":"c:\\\\MyArchieves","connectionString":""}]}', true);
+        $contents = Storage::get('config.json');
+        return json_decode($contents, true);
     }
 }
