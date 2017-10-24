@@ -2,8 +2,12 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Storage;
+
 class ConfigManager extends ArrayLike
 {
+    const SETTING_FILE = 'config.json';
+
     /** @var array */
     private $configs;
 
@@ -21,7 +25,7 @@ class ConfigManager extends ArrayLike
      */
     public function processConfigs(): void
     {
-        $scheduleJson = $this->getConfigJson();
+        $scheduleJson = json_decode(Storage::get(static::SETTING_FILE), true);
 
         foreach ($scheduleJson['configs'] as $each) {
             $this->configs[] = new Config($each);
@@ -36,15 +40,5 @@ class ConfigManager extends ArrayLike
     private function resetSchedules(): void
     {
         $this->setContainer($this->configs);
-    }
-
-    /**
-     * 還不清楚 schedule.json 是由 construct 傳入還是讀取固定路徑的檔案
-     * 先寫死假資料
-     * @return array
-     */
-    private function getConfigJson(): array
-    {
-        return json_decode('{"configs":[{"ext":"cs","location":"c:\\\\Projects","subDirectory":true,"unit":"file","remove":false,"handler":"zip","destination":"directory","dir":"c:\\\\MyArchieves","connectionString":""},{"ext":"DOCX","location":"c:\\\\Documents","subDirectory":true,"unit":"file","remove":false,"handler":"encode","destination":"db","dir":"","connectionString":"MyConnectionString"},{"ext":"jpg","location":"c:\\\\Pictures","subDirectory":true,"unit":"file","remove":false,"handler":"","destination":"directory","dir":"c:\\\\MyArchieves","connectionString":""}]}', true);
     }
 }

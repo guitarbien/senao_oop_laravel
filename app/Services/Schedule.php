@@ -4,13 +4,13 @@ namespace App\Services;
 
 class Schedule
 {
-    /** @var  string */
+    /** @var string 此排程所處理的檔案格式 */
     private $ext;
 
-    /** @var  string */
+    /** @var string 此排程執行的間隔 */
     private $interval;
 
-    /** @var  string */
+    /** @var string 此排程所處理的時間 */
     private $time;
 
     /**

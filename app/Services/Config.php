@@ -4,31 +4,31 @@ namespace App\Services;
 
 class Config
 {
-    /** @var  string */
+    /** @var string 檔案格式 */
     private $ext;
 
-    /** @var  string */
+    /** @var string 要備份檔案的目錄 */
     private $location;
 
-    /** @var  bool */
+    /** @var bool 是否處理子目錄 */
     private $subDirectory;
 
-    /** @var  string */
+    /** @var string 備份單位 fiel:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
     private $unit;
 
-    /** @var  bool */
+    /** @var bool 處理為是否刪除檔案 */
     private $remove;
 
-    /** @var  string */
+    /** @var string 處理方式 zip:壓縮、encode:加密 */
     private $handler;
 
-    /** @var  string */
+    /** @var string 處理後要儲存到什麼地方 directory:目錄、db:資料庫 */
     private $destination;
 
-    /** @var  string */
+    /** @var string 處理後的目錄 */
     private $dir;
 
-    /** @var  string */
+    /** @var string 資料庫連接字串 */
     private $connectionString;
 
     /**
