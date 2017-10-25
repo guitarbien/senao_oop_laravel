@@ -26,17 +26,17 @@ class ConfigManagerTest extends TestCase
         $this->assertObjectHasAttribute('configs', $configManager);
     }
 
-    public function test_ConfigManager可以用count取得目前存有幾個schedules()
+    public function test_ConfigManager可以用count取得目前存有幾個configs()
     {
         $configManager = new ConfigManager;
 
         $this->assertEquals(0, $configManager->count());
     }
 
-    public function test_scheduleManager可將schedule_json資料組成多筆Config格式並存在field中()
+    public function test_scheduleManager可將config_json資料組成多筆Config格式並存在field中()
     {
         $configManager = new ConfigManager;
-        $configManager->processConfigs();
+        $configManager->processJsonConfig();
 
         $this->assertEquals(3, $configManager->count());
         $this->assertInstanceOf(Config::class, $configManager[0]);

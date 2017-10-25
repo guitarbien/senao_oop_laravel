@@ -2,43 +2,38 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Storage;
-
-class ConfigManager extends ArrayLike
+/**
+ * Class ConfigManager
+ * @package App\Services
+ */
+class ConfigManager extends JsonManager
 {
-    const SETTING_FILE = 'config.json';
-
-    /** @var array */
+    /** @var Config[] */
     private $configs;
 
+    /** config file name */
+    const SETTING_FILE = 'config.json';
+
     /**
-     * 取得 $schedules 的數量
+     * 將 config.json 轉成 $config，每個元素都是 Config
+     */
+    public function processJsonConfig(): void
+    {
+        $configJson = $this->getJsonObject();
+
+        foreach ($configJson['configs'] as $each) {
+            $this->configs[] = new Config($each);
+        }
+
+        $this->resetConfigs($this->configs);
+    }
+
+    /**
+     * 取得個別 manager 的數量
      * @return int
      */
     public function count(): int
     {
         return count($this->configs);
-    }
-
-    /**
-     * 將 schedule.json 轉成 $schedules，每個元素都是 Schedule
-     */
-    public function processConfigs(): void
-    {
-        $scheduleJson = json_decode(Storage::get(static::SETTING_FILE), true);
-
-        foreach ($scheduleJson['configs'] as $each) {
-            $this->configs[] = new Config($each);
-        }
-
-        $this->resetSchedules();
-    }
-
-    /**
-     * 實作 ArrayAccess，將整理好的 $schedules 放入上層的 container
-     */
-    private function resetSchedules(): void
-    {
-        $this->setContainer($this->configs);
     }
 }

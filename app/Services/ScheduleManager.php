@@ -2,43 +2,38 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Storage;
-
-class ScheduleManager extends ArrayLike
+/**
+ * Class ScheduleManager
+ * @package App\Services
+ */
+class ScheduleManager extends JsonManager
 {
-    const SETING_FILE = 'schedule.json';
-
-    /** @var array */
+    /** @var Schedule[] */
     private $schedules;
 
-    /**
-     * 取得 $schedules 的數量
-     * @return int
-     */
-    public function count(): int
-    {
-        return count($this->schedules);
-    }
+    /** config file name */
+    const SETTING_FILE = 'schedule.json';
 
     /**
      * 將 schedule.json 轉成 $schedules，每個元素都是 Schedule
      */
-    public function processSchedules(): void
+    public function processJsonConfig(): void
     {
-        $scheduleJson = json_decode(Storage::get(static::SETING_FILE), true);
+        $scheduleJson = $this->getJsonObject();
 
         foreach ($scheduleJson['schedules'] as $each) {
             $this->schedules[] = new Schedule($each);
         }
 
-        $this->resetSchedules();
+        $this->resetConfigs($this->schedules);
     }
 
     /**
-     * 實作 ArrayAccess，將整理好的 $schedules 放入上層的 container
+     * 取得個別 manager 的數量
+     * @return int
      */
-    private function resetSchedules(): void
+    public function count(): int
     {
-        $this->setContainer($this->schedules);
+        return count($this->schedules);
     }
 }

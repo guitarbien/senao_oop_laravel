@@ -36,7 +36,7 @@ class ScheduleManagerTest extends TestCase
     public function test_scheduleManager可將schedule_json資料組成多筆Schedule格式並存在field中()
     {
         $scheduleManager = new ScheduleManager;
-        $scheduleManager->processSchedules();
+        $scheduleManager->processJsonConfig();
 
         $this->assertEquals(3, $scheduleManager->count());
         $this->assertInstanceOf(Schedule::class, $scheduleManager[0]);
