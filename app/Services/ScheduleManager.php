@@ -27,4 +27,13 @@ class ScheduleManager extends JsonManager
 
         $this->resetConfigs($this->schedules);
     }
+
+    /**
+     * 取得個別 manager 的數量
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->schedules);
+    }
 }

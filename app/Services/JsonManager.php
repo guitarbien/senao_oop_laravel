@@ -14,19 +14,16 @@ abstract class JsonManager extends ArrayLike
      * @var Config[] | Schedule[]
      * 經 resetConfigs() 將讀取到的 Config 或 Schedule 的陣列存回此變數
      */
-    private $configs;
+    private $generalConfigs;
 
     /** string 設定檔檔名 此處不設定值，由 child class 提供實際檔案名稱 */
     const SETTING_FILE = '';
 
     /**
-     * 取得 $schedules 的數量
+     * 取得個別 manager 的數量
      * @return int
      */
-    public function count(): int
-    {
-        return count($this->configs);
-    }
+    public abstract function count(): int;
 
     /**
      * 從設定檔讀取出 json config array
@@ -40,7 +37,6 @@ abstract class JsonManager extends ArrayLike
     /**
      * 將 config.json   轉成 $config，   每個元素都是 Config
      * 將 schedule.json 轉成 $schedules，每個元素都是 Schedule
-     * ...
      */
     public abstract function processJsonConfig(): void;
 
@@ -50,7 +46,7 @@ abstract class JsonManager extends ArrayLike
      */
     protected function resetConfigs(array $config): void
     {
-        $this->configs = $config;
-        $this->setContainer($this->configs);
+        $this->generalConfigs = $config;
+        $this->setContainer($this->generalConfigs);
     }
 }
