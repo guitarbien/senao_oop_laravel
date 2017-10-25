@@ -9,19 +9,10 @@ namespace App\Services;
 class ScheduleManager extends JsonManager
 {
     /** @var Schedule[] */
-    private $configs;
+    private $schedules;
 
     /** config file name */
     const SETTING_FILE = 'schedule.json';
-
-    /**
-     * ScheduleManager constructor.
-     * 將此 instance 指派給 parent
-     */
-    public function __construct()
-    {
-        parent::__construct($this);
-    }
 
     /**
      * 將 schedule.json 轉成 $schedules，每個元素都是 Schedule
@@ -31,9 +22,9 @@ class ScheduleManager extends JsonManager
         $scheduleJson = $this->getJsonObject();
 
         foreach ($scheduleJson['schedules'] as $each) {
-            $this->configs[] = new Schedule($each);
+            $this->schedules[] = new Schedule($each);
         }
 
-        $this->resetConfigs($this->configs);
+        $this->resetConfigs($this->schedules);
     }
 }
