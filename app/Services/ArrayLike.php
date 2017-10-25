@@ -4,6 +4,10 @@ namespace App\Services;
 
 use ArrayAccess;
 
+/**
+ * 實作 ArrayAccess 讓 object 能像 array 般被操作
+ * @package App\Services
+ */
 class ArrayLike implements ArrayAccess
 {
     /** @var array */
@@ -48,9 +52,10 @@ class ArrayLike implements ArrayAccess
     {
         if (is_null($offset)) {
             $this->container[] = $value;
-        } else {
-            $this->container[$offset] = $value;
+            return;
         }
+
+        $this->container[$offset] = $value;
     }
 
     /**
