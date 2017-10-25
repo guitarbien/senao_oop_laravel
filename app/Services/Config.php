@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+/**
+ * Class Config
+ * @package App\Services
+ */
 class Config
 {
     /** @var string 檔案格式 */

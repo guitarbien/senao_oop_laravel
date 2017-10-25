@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+/**
+ * Class Schedule
+ * @package App\Services
+ */
 class Schedule
 {
     /** @var string 此排程所處理的檔案格式 */

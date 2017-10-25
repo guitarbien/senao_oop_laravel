@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+/**
+ * Class ConfigManager
+ * @package App\Services
+ */
 class ConfigManager extends JsonManager
 {
     /** @var Config[] */

@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+/**
+ * Class MyBackupService
+ * @package App\Services
+ */
 class MyBackupService
 {
     /** @var JsonManager[] 存放各種 Manager 的陣列 */

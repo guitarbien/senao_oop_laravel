@@ -4,6 +4,10 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class JsonManager
+ * @package App\Services
+ */
 abstract class JsonManager extends ArrayLike
 {
     /**

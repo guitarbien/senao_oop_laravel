@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+/**
+ * Class ScheduleManager
+ * @package App\Services
+ */
 class ScheduleManager extends JsonManager
 {
     /** @var Schedule[] */
