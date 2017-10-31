@@ -17,6 +17,8 @@ class MyBackupServiceTest extends TestCase
         $myBackupService = new MyBackupService;
         $myBackupService->processJsonConfigs();
 
+        $myBackupService->doBackup();
+
         // 尚未實作備份 故還沒有東西可以 assert
         // 以此 test 當作使用端來測試
         $this->assertTrue(true);
