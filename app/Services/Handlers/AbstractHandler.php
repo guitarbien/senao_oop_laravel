@@ -2,6 +2,11 @@
 
 namespace App\Services\Handlers;
 
-abstract class AbstractHandler
+use App\Services\Candidate;
+
+abstract class AbstractHandler implements Handler
 {
+    public function perform(Candidate $candidate, array $target): array
+    {
+    }
 }
