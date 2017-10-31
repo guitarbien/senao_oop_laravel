@@ -12,14 +12,15 @@ class ConfigTest extends TestCase
         $input = [
             'ext'              => '',
             'location'         => '',
-            'subDirectory'     => '',
+            'subDirectory'     => true,
             'unit'             => '',
-            'remove'           => '',
-            'handler'          => '',
+            'remove'           => false,
+            'handlers'         => [],
             'destination'      => '',
             'dir'              => '',
             'connectionString' => '',
         ];
+
         $config = new Config($input);
 
         // assert for the fields
@@ -28,7 +29,7 @@ class ConfigTest extends TestCase
         $this->assertObjectHasAttribute('subDirectory', $config);
         $this->assertObjectHasAttribute('unit', $config);
         $this->assertObjectHasAttribute('remove', $config);
-        $this->assertObjectHasAttribute('handler', $config);
+        $this->assertObjectHasAttribute('handlers', $config);
         $this->assertObjectHasAttribute('destination', $config);
         $this->assertObjectHasAttribute('dir', $config);
         $this->assertObjectHasAttribute('connectionString', $config);

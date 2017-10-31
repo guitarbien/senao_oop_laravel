@@ -24,7 +24,7 @@ class Config
     private $remove;
 
     /** @var string 處理方式 zip:壓縮、encode:加密 */
-    private $handler;
+    private $handlers;
 
     /** @var string 處理後要儲存到什麼地方 directory:目錄、db:資料庫 */
     private $destination;
@@ -45,12 +45,11 @@ class Config
         $this->subDirectory     = $config['subDirectory'];
         $this->unit             = $config['unit'];
         $this->remove           = $config['remove'];
-        $this->handler          = $config['handler'];
+        $this->handlers         = $config['handlers'];
         $this->destination      = $config['destination'];
         $this->dir              = $config['dir'];
         $this->connectionString = $config['connectionString'];
     }
-
 
     /**
      * @return string
@@ -95,9 +94,9 @@ class Config
     /**
      * @return string
      */
-    public function getHandler(): string
+    public function getHandlers(): string
     {
-        return $this->handler;
+        return $this->handlers;
     }
 
     /**
