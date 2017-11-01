@@ -3,6 +3,7 @@
 namespace App\Services\Handlers;
 
 use App\Services\Candidate;
+use Illuminate\Support\Facades\File;
 
 class FileHandler extends AbstractHandler
 {
@@ -22,11 +23,18 @@ class FileHandler extends AbstractHandler
         return $this->convertByteArrayToFile($candidate, $target);
     }
 
+    /**
+     * 讀取檔案成陣列
+     * @param Candidate $candidate
+     * @return array
+     */
     private function convertFileToByteArray(Candidate $candidate): array
     {
+        return file($candidate->getName());
     }
 
     private function convertByteArrayToFile(Candidate $candidate, array $target)
     {
+        File::put($candidate->getConfig()->getDir(), implode('', $target));
     }
 }
