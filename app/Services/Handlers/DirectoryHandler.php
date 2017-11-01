@@ -49,6 +49,6 @@ class DirectoryHandler extends AbstractHandler
      */
     private function getNewFilePath(Candidate $candidate, string $oldPath): string
     {
-        return File::dirname($candidate->getName()) . DIRECTORY_SEPARATOR . File::basename($oldPath);
+        return $candidate->getConfig()->getDir() . DIRECTORY_SEPARATOR . File::basename($oldPath);
     }
 }

@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Services\Handlers\Handler;
 use App\Services\Handlers\HandlerFactory;
-use SplFileInfo;
-use File;
+use Illuminate\Support\Facades\File;
+use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Class MyBackupService
@@ -134,6 +134,4 @@ class MyBackupService
 
         return $handlers;
     }
-
-
 }
