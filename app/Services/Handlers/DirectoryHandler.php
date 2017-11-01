@@ -11,7 +11,7 @@ class DirectoryHandler extends AbstractHandler
      * @param array $target
      * @return array
      */
-    public function perform(Candidate $candidate, array $target): array
+    public function perform(Candidate $candidate, array $target): ?array
     {
         $target = parent::perform($candidate, $target);
 

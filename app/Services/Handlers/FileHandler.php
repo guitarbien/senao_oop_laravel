@@ -11,7 +11,7 @@ class FileHandler extends AbstractHandler
      * @param array $target
      * @return array
      */
-    public function perform(Candidate $candidate, array $target): array
+    public function perform(Candidate $candidate, array $target): ?array
     {
         $target = parent::perform($candidate, $target);
 
@@ -19,14 +19,14 @@ class FileHandler extends AbstractHandler
             return $this->convertFileToByteArray($candidate);
         }
 
-        $this->convertByteArrayToFile($candidate, $target);
+        return $this->convertByteArrayToFile($candidate, $target);
     }
 
     private function convertFileToByteArray(Candidate $candidate): array
     {
     }
 
-    private function convertByteArrayToFile(Candidate $candidate, array $target): void
+    private function convertByteArrayToFile(Candidate $candidate, array $target)
     {
     }
 }
