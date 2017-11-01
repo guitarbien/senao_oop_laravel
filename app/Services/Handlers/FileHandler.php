@@ -35,6 +35,6 @@ class FileHandler extends AbstractHandler
 
     private function convertByteArrayToFile(Candidate $candidate, array $target)
     {
-        File::put($candidate->getConfig()->getDir(), implode('', $target));
+        File::put($this->getBackupFilePath($candidate), implode('', $target));
     }
 }
