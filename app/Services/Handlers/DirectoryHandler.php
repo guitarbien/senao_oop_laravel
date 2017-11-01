@@ -4,7 +4,7 @@ namespace App\Services\Handlers;
 
 use App\Services\Candidate;
 
-class ZDirectoryHandleripHandler extends AbstractHandler
+class DirectoryHandler extends AbstractHandler
 {
     /**
      * @param Candidate $candidate
