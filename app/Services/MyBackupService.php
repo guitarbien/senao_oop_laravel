@@ -4,12 +4,8 @@ namespace App\Services;
 
 use App\Services\Handlers\Handler;
 use App\Services\Handlers\HandlerFactory;
-use const DIRECTORY_SEPARATOR;
-use function explode;
-use function get_class;
-use Storage;
+use SplFileInfo;
 use File;
-use function strtolower;
 
 /**
  * Class MyBackupService
@@ -19,6 +15,12 @@ class MyBackupService
 {
     /** @var JsonManager[] 存放各種 Manager 的陣列 */
     private $managers = [];
+
+    /** @const string config unit 處理單位 檔案 */
+    const UNIT_STRING_FILE = 'file';
+
+    /** @const string config unit 處理單位 目錄 */
+    const UNIT_STRING_DIRECTORY = 'directory';
 
     /**
      * MyBackupService constructor.
@@ -41,7 +43,6 @@ class MyBackupService
 
     public function doBackup()
     {
-        /** @var Candidate[] $candidates */
         $candidates = $this->findFiles();
 
         foreach ($candidates as $candidate) {
@@ -51,91 +52,87 @@ class MyBackupService
 
     /**
      * 先隨便寫
-     * @return array
+     * @return Candidate[]
      */
     private function findFiles(): array
     {
-        $fileList = ["xxxx.cs"];
-
         /** @var Candidate[] $candidates */
         $candidates = [];
 
-        foreach ($fileList as $filename) {
-            $info['config']       = $this->findMatchConfig($filename);
-            $info['fileDateTime'] = Storage::lastModified($filename);
-            $info['name']         = $this->getFileName($filename);
-            $info['processName']  = '???';
-            $info['size']         = Storage::size($filename);
+        // 讀 config.json 決定要去哪個路徑抓資料
+        foreach ($this->getConfigManager() as $config) {
+            /** @var Config $config */
+            if ($config->getUnit() === self::UNIT_STRING_FILE) {
+                $fileList = File::get($config->getLocation());
+            } else {
+                $fileList = File::files($config->getLocation());
+            }
 
-            $candidates[] = new Candidate($info);
+            // 讀取每個設定檔的 location 下的檔案清單
+            foreach ($fileList as $file) {
+                /** @var SplFileInfo $file */
+                // 只處理符合 extension 的 file
+                if ($config->getExt() !== $file->getExtension()) {
+                    continue;
+                }
+
+                $info['config']       = $config;
+                $info['fileDateTime'] = $file->getMTime();
+                $info['name']         = $file->getPathname();
+                $info['processName']  = '???';
+                $info['size']         = $file->getSize();
+
+                $candidates[] = new Candidate($info);
+            }
         }
 
         return $candidates;
     }
 
     /**
-     * 找出此檔案應使用何種 Config
-     * @param string $filename
-     * @return Config
-     */
-    private function findMatchConfig(string $filename): Config
-    {
-        $configManager = $this->getConfigManager();
-
-        /** @var Config $config */
-        foreach ($configManager as $config) {
-            if (strtolower($config['ext']) == strtolower(File::extension($filename))) {
-                return $config;
-            }
-        }
-    }
-
-    /**
      * 由 list managers 中找出 ConfigManager
      * @return ConfigManager
      */
-    private function getConfigManager(): ConfigManager
+    private function getConfigManager(): ?ConfigManager
     {
         foreach ($this->managers as $manager) {
-            if (get_class($manager) === 'ConfigManager') {
+            /** @var JsonManager $manager */
+            if ($manager instanceof ConfigManager) {
                 /** @var ConfigManager $manager */
                 return $manager;
             }
         }
-    }
 
-    /**
-     * 從 path 取得檔名
-     * @param string $filename
-     * @return string
-     */
-    private function getFileName(string $filename): string
-    {
-        return collect(explode(DIRECTORY_SEPARATOR, $filename))->last();
+        return null;
     }
 
     private function broadcastToHandlers(Candidate $candidate): void
     {
-        /** @var Handler[] $handlers */
         $handlers = $this->findHandlers($candidate);
 
+        $target = [];
         foreach ($handlers as $handler) {
-            /** @var array $target */
             $target = $handler->perform($candidate, $target);
         }
     }
 
+    /**
+     * @param Candidate $candidate
+     * @return Handler[]
+     */
     private function findHandlers(Candidate $candidate): array
     {
         /** @var Handler[] $handlers */
         $handlers[] = HandlerFactory::create('file');
 
         // 讀取 config 的 handlers
-        foreach ($candidate['handlers'] as $handler) {
-            $handlers[] = $handler;
+        foreach ($candidate->getConfig()->getHandlers() as $handler) {
+            $handlers[] = HandlerFactory::create($handler);
         }
 
-        $handlers[] = HandlerFactory::create($candidate['destination']);
+        $handlers[] = HandlerFactory::create($candidate->getConfig()->getDestination());
+
+        return $handlers;
     }
 
 
