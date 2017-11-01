@@ -17,7 +17,7 @@ class Config
     /** @var bool 是否處理子目錄 */
     private $subDirectory;
 
-    /** @var string 備份單位 field:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
+    /** @var string 備份單位 file:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
     private $unit;
 
     /** @var bool 處理為是否刪除檔案 */
@@ -56,7 +56,7 @@ class Config
      */
     public function getExt(): string
     {
-        return $this->ext;
+        return strtolower($this->ext);
     }
 
     /**
@@ -80,7 +80,7 @@ class Config
      */
     public function getUnit(): string
     {
-        return $this->unit;
+        return strtolower($this->unit);
     }
 
     /**
@@ -94,7 +94,7 @@ class Config
     /**
      * @return string
      */
-    public function getHandlers(): string
+    public function getHandlers(): array
     {
         return $this->handlers;
     }
@@ -104,7 +104,7 @@ class Config
      */
     public function getDestination(): string
     {
-        return $this->destination;
+        return strtolower($this->destination);
     }
 
     /**
