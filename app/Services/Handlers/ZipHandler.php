@@ -15,12 +15,22 @@ class ZipHandler extends AbstractHandler
     {
         $target = parent::perform($candidate, $target);
 
-        if (empty($target)) {
-            return $this->zipData($candidate, $target);
-        }
+        return $this->zipData($candidate, $target);
     }
 
+    /**
+     * @param $candidate
+     * @param $target
+     * @return array
+     */
     private function zipData($candidate, $target): array
     {
+        $result = [];
+
+        foreach ($target as $line) {
+            $result[] = gzencode($line, 9);
+        }
+
+        return $result;
     }
 }
