@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Services\Config;
 use App\Services\ConfigManager;
 use Tests\TestCase;
+use Traversable;
 
 class ConfigManagerTest extends TestCase
 {
@@ -17,6 +18,12 @@ class ConfigManagerTest extends TestCase
 
         $this->assertEquals('cool', $configManager[0]);
         $this->assertEquals('not cool', $configManager['x']);
+    }
+
+    public function test_ConfigManager可以像array做loop()
+    {
+        $configManager = new ConfigManager;
+        $this->assertInstanceOf(Traversable::class, $configManager);
     }
 
     public function test_ConfigManager基本屬性()
