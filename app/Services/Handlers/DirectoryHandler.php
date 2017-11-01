@@ -24,7 +24,7 @@ class DirectoryHandler extends AbstractHandler
     }
 
     /**
-     * 將 byte[] 還原成檔案，並複製到其他目錄
+     * 將記憶體中的資料透過 FileHandler 還原成檔案，並複製到其他目錄
      * @param $candidate
      * @param $target
      * @return array

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 class FileHandler extends AbstractHandler
 {
     /**
+     * 讀寫檔案
      * @param Candidate $candidate
      * @param array $target
      * @return array
@@ -33,6 +34,11 @@ class FileHandler extends AbstractHandler
         return file($candidate->getName());
     }
 
+    /**
+     * 回存檔案(和原檔相同路徑)
+     * @param Candidate $candidate
+     * @param array $target
+     */
     private function convertByteArrayToFile(Candidate $candidate, array $target)
     {
         File::put($this->getBackupFilePath($candidate), implode('', $target));

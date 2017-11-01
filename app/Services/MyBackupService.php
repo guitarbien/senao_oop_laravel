@@ -41,7 +41,10 @@ class MyBackupService
         }
     }
 
-    public function doBackup()
+    /**
+     * 執行備份
+     */
+    public function doBackup(): void
     {
         $candidates = $this->findFiles();
 
@@ -62,6 +65,7 @@ class MyBackupService
         // 讀 config.json 決定要去哪個路徑抓資料
         foreach ($this->getConfigManager() as $config) {
             /** @var Config $config */
+            // 應對目錄或是檔案做處理
             if ($config->getUnit() === self::UNIT_STRING_FILE) {
                 $fileList = File::get($config->getLocation());
             } else {
@@ -106,6 +110,10 @@ class MyBackupService
         return null;
     }
 
+    /**
+     * 每個 candidate 依照設定讓對應的 handler 做處理
+     * @param Candidate $candidate
+     */
     private function broadcastToHandlers(Candidate $candidate): void
     {
         $handlers = $this->findHandlers($candidate);
@@ -117,6 +125,7 @@ class MyBackupService
     }
 
     /**
+     * 使用 HandlerFactory 依序產生 handler
      * @param Candidate $candidate
      * @return Handler[]
      */
@@ -130,6 +139,7 @@ class MyBackupService
             $handlers[] = HandlerFactory::create($handler);
         }
 
+        // 目前只有 directory
         $handlers[] = HandlerFactory::create($candidate->getConfig()->getDestination());
 
         return $handlers;

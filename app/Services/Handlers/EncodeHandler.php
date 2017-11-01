@@ -19,6 +19,7 @@ class EncodeHandler extends AbstractHandler
     }
 
     /**
+     * 對每段 binary string 做 base64
      * @param $candidate
      * @param $target
      * @return array

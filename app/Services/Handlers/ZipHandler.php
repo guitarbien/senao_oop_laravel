@@ -19,6 +19,7 @@ class ZipHandler extends AbstractHandler
     }
 
     /**
+     * 使用 gzip 壓縮
      * @param $candidate
      * @param $target
      * @return array
