@@ -17,14 +17,14 @@ class Config
     /** @var bool 是否處理子目錄 */
     private $subDirectory;
 
-    /** @var string 備份單位 field:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
+    /** @var string 備份單位 file:以單一檔案為處理單位、directory：以整個目錄為處理單位 */
     private $unit;
 
     /** @var bool 處理為是否刪除檔案 */
     private $remove;
 
     /** @var string 處理方式 zip:壓縮、encode:加密 */
-    private $handler;
+    private $handlers;
 
     /** @var string 處理後要儲存到什麼地方 directory:目錄、db:資料庫 */
     private $destination;
@@ -45,19 +45,18 @@ class Config
         $this->subDirectory     = $config['subDirectory'];
         $this->unit             = $config['unit'];
         $this->remove           = $config['remove'];
-        $this->handler          = $config['handler'];
+        $this->handlers         = $config['handlers'];
         $this->destination      = $config['destination'];
         $this->dir              = $config['dir'];
         $this->connectionString = $config['connectionString'];
     }
-
 
     /**
      * @return string
      */
     public function getExt(): string
     {
-        return $this->ext;
+        return strtolower($this->ext);
     }
 
     /**
@@ -81,7 +80,7 @@ class Config
      */
     public function getUnit(): string
     {
-        return $this->unit;
+        return strtolower($this->unit);
     }
 
     /**
@@ -95,9 +94,9 @@ class Config
     /**
      * @return string
      */
-    public function getHandler(): string
+    public function getHandlers(): array
     {
-        return $this->handler;
+        return $this->handlers;
     }
 
     /**
@@ -105,7 +104,7 @@ class Config
      */
     public function getDestination(): string
     {
-        return $this->destination;
+        return strtolower($this->destination);
     }
 
     /**

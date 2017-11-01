@@ -17,6 +17,8 @@ class MyBackupServiceTest extends TestCase
         $myBackupService = new MyBackupService;
         $myBackupService->processJsonConfigs();
 
+        $myBackupService->doBackup();
+
         // 尚未實作備份 故還沒有東西可以 assert
         // 以此 test 當作使用端來測試
         $this->assertTrue(true);
@@ -25,7 +27,7 @@ class MyBackupServiceTest extends TestCase
     public function test_使用myBackupService後每個manager的count應正確()
     {
         Storage::fake('local');
-        Storage::disk('local')->put('config.json', '{"configs":[{"ext":"cs","location":"c:\\\\Projects","subDirectory":true,"unit":"file","remove":false,"handler":"zip","destination":"directory","dir":"c:\\\\MyArchieves","connectionString":""}]}');
+        Storage::disk('local')->put('config.json', '{"configs":[{"ext":"cs","location":"c:\\\\Projects","subDirectory":true,"unit":"file","remove":false,"handlers":["zip"],"destination":"directory","dir":"c:\\\\MyArchieves","connectionString":""}]}');
         Storage::disk('local')->put('schedule.json', '{"schedules":[{"ext":"cs","time":"12:00","interval":"Everyday"},{"ext":"docx","time":"20:00","interval":"Everyday"}]}');
 
         $myBackupService = new MyBackupService;
