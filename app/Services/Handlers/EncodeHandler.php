@@ -15,12 +15,22 @@ class EncodeHandler extends AbstractHandler
     {
         $target = parent::perform($candidate, $target);
 
-        if (empty($target)) {
-            return $this->encodeData($candidate, $target);
-        }
+        return $this->encodeData($candidate, $target);
     }
 
+    /**
+     * @param $candidate
+     * @param $target
+     * @return array
+     */
     private function encodeData($candidate, $target): array
     {
+        $result = [];
+
+        foreach ($target as $line) {
+            $result[] = base64_encode($line);
+        }
+
+        return $result;
     }
 }
