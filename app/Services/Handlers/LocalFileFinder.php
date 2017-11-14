@@ -5,7 +5,6 @@ namespace App\Services\Handlers;
 use App\Services\Candidate;
 use App\Services\Config;
 use Illuminate\Support\Facades\File;
-use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Class LocalFileFinder
@@ -42,11 +41,6 @@ class LocalFileFinder extends AbstractFileFinder
 
         $this->files = $fileList;
     }
-
-    // private function getSubDirectoryFiles(): array
-    // {
-    //     // 直接使用 framework 提供的 filesystem
-    // }
 
     /**
      * @param string $filename
