@@ -3,7 +3,9 @@
 namespace App\Services\Handlers;
 
 use App\Services\Candidate;
+use App\Services\CandidateFactory;
 use App\Services\Config;
+use DateTime;
 use Illuminate\Support\Facades\File;
 
 /**
@@ -50,12 +52,11 @@ class LocalFileFinder extends AbstractFileFinder
     {
         $pathName = $this->config->getLocation() . $filename;
 
-        $info['config']       = $this->config;
-        $info['fileDateTime'] = File::lastModified($pathName);
-        $info['name']         = $filename;
-        $info['processName']  = '???';
-        $info['size']         = File::size($pathName);
-
-        return new Candidate($info);
+        return CandidateFactory::create(
+            $this->config,
+            $filename,
+            (new DateTime())->setTimestamp(File::lastModified($pathName)),
+            File::size($pathName)
+        );
     }
 }
