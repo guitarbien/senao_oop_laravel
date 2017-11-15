@@ -12,7 +12,7 @@ class SimpleTask extends AbstractTask
      * @param Config $config
      * @param Schedule $schedule
      */
-    public function execute(Config $config, Schedule $schedule): void
+    public function execute(Config $config, Schedule $schedule = null): void
     {
         parent::execute($config, $schedule);
 

@@ -16,8 +16,16 @@ class ScheduledTask extends AbstractTask
     {
         parent::execute($config, $schedule);
 
-        foreach ($this->fileFinder as $candidate) {
-            $this->broadcastToHandlers($candidate);
+        while (true) {
+            // 檢查頻率時間
+            if (date("l") === $schedule->getInterval() && date("H:i") === $schedule->getTime()) {
+
+                foreach ($this->fileFinder as $candidate) {
+                    $this->broadcastToHandlers($candidate);
+                }
+
+                break;
+            }
         }
     }
 }
