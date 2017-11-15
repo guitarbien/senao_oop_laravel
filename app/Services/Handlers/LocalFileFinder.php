@@ -3,9 +3,10 @@
 namespace App\Services\Handlers;
 
 use App\Services\Candidate;
+use App\Services\CandidateFactory;
 use App\Services\Config;
+use DateTime;
 use Illuminate\Support\Facades\File;
-use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Class LocalFileFinder
@@ -43,11 +44,6 @@ class LocalFileFinder extends AbstractFileFinder
         $this->files = $fileList;
     }
 
-    // private function getSubDirectoryFiles(): array
-    // {
-    //     // 直接使用 framework 提供的 filesystem
-    // }
-
     /**
      * @param string $filename
      * @return Candidate
@@ -56,12 +52,11 @@ class LocalFileFinder extends AbstractFileFinder
     {
         $pathName = $this->config->getLocation() . $filename;
 
-        $info['config']       = $this->config;
-        $info['fileDateTime'] = File::lastModified($pathName);
-        $info['name']         = $filename;
-        $info['processName']  = '???';
-        $info['size']         = File::size($pathName);
-
-        return new Candidate($info);
+        return CandidateFactory::create(
+            $this->config,
+            $filename,
+            (new DateTime())->setTimestamp(File::lastModified($pathName)),
+            File::size($pathName)
+        );
     }
 }
