@@ -18,11 +18,14 @@ class TaskDispatcher
      */
     public function simpleTask(array $managers): void
     {
+        $configManager = $this->findManager($managers, ConfigManager::class);
+
         $this->task = TaskFactory::create("simple");
 
         // configManager 可以 iterate 當 configs 用
-        $configManager = $this->findManager($managers, ConfigManager::class);
-        $this->task->execute($configManager, null);
+        foreach ($configManager as $config) {
+            $this->task->execute($config, null);
+        }
     }
 
     /**
@@ -30,12 +33,26 @@ class TaskDispatcher
      */
     public function scheduledTask(array $managers): void
     {
+        $configManager   = $this->findManager($managers, ConfigManager::class);
+        $scheduleManager = $this->findManager($managers,ScheduleManager::class);
+
         $this->task = TaskFactory::create("scheduled");
 
         // configManager 可以 iterate 當 configs 用
-        $configManager = $this->findManager($managers, ConfigManager::class);
-        $scheduleManager = $this->findManager($managers,ScheduleManager::class);
-        $this->task->execute($configManager, $scheduleManager);
+        foreach ($configManager as $config) {
+            // 找出現在這個 config 所屬檔案類型所對應的 schedule
+            $schedule = null;
+            foreach ($scheduleManager as $eachSchedule) {
+                /** @var Schedule $eachSchedule */
+                /** @var Config $config */
+                if ($eachSchedule->getExt() === $config->getExt()) {
+                    $schedule = $eachSchedule;
+                    break;
+                }
+            }
+
+            $this->task->execute($config, $schedule);
+        }
     }
 
     /**
