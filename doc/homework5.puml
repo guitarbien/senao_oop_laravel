@@ -1,0 +1,44 @@
+@startuml
+class MyBackupService {
+    +scheduledBackup()
+    +simpleBackup()
+}
+class TaskDispatcher {
+    +simpleTask()
+    +scheduledTask()
+}
+class TaskFactory {
+    +create()
+}
+class CandidateFactory {
+    +create()
+}
+class Candidate {
+    +getConfig
+    +getFileDateTime
+    +getName
+    +getProcessName
+    +getSize
+}
+interface Task {
+    +execute()
+}
+abstract class AbstractTask {
+    +execute()
+}
+class SimpleTask {
+    +execute()
+}
+class ScheduledTask {
+    +execute()
+}
+CandidateFactory -> Candidate
+MyBackupService *-> TaskDispatcher
+TaskDispatcher .> TaskFactory
+TaskFactory *-> SimpleTask
+TaskFactory *-> ScheduledTask
+Task <|.. AbstractTask
+AbstractTask <|-- SimpleTask
+AbstractTask <|-- ScheduledTask
+TaskFactory .> Task
+@enduml
