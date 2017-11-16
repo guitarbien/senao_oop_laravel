@@ -4,3 +4,6 @@ Development with:
 - PHP 7.1.8
 - Laravel 5.5.18
 - JetBrains PhpStorm 2017.2.4
+
+class diagram
+![PlantUML model](http://www.plantuml.com/plantuml/png/ZLBBRi8m4BpxAtnigP8lG0WAujQgKlY1nLxe2kSXswbAI_yTXzZ68RIgRpipkpkQzTnOqBOj5HCAZE4lnsSGXxOfK7-GGFxDk7jFHhoZR1NAddruz32LZSA8_VWX6p275Pa6h6lJSSP5t76nFKprODg_1c5hVGpDGYDOJ3HBg2H9X_rR61HxjCkwsj4-bcjIk7AA3PKOmLT8YZTT2pHcW1NqXMuBLHRr3bnMdUsm13zHjDu7R8tLpYNl3Iry-PkyLnKnhJyqQNxtPAEGijar3tPxwubZXwTZDvVCP-bjM7gdhldgUKobLYyidvxoV1066oGpFMLPEl4EEPePDdgVR8wLT7_x3000)
