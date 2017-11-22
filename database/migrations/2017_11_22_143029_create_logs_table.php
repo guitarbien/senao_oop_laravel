@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBackupLogsTable extends Migration
+class CreateLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBackupLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('backup_logs', function (Blueprint $table) {
+        Schema::create('logs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('file_name');
+            $table->dateTime('file_date_time');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateBackupLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('backup_logs');
+        Schema::dropIfExists('logs');
     }
 }
