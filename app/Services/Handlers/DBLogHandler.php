@@ -2,6 +2,7 @@
 
 namespace App\Services\Handlers;
 
+use App\Log;
 use App\Services\Candidate;
 
 /**
@@ -18,6 +19,9 @@ class DBLogHandler extends AbstractDBHandler
     public function perform(Candidate $candidate, array $target): ?array
     {
         // insert db log
+        $log = new Log();
+        $log->file_date_time = $candidate->getFileDateTime();
+        $log->save();
 
         return $target;
     }
