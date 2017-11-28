@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+
+actor normal as "一般使用者"
+actor computer as "電腦計時器"
+
+rectangle MyBackupService {
+    normal -- (依照設定檔執行立即備份)
+    computer -- (依照設定檔執行排程備份)
+}
+@enduml
