@@ -4,3 +4,16 @@ Development with:
 - PHP 7.1.8
 - Laravel 5.5.18
 - JetBrains PhpStorm 2017.2.4
+
+- class diagram
+  ![PlantUML model](http://www.plantuml.com/plantuml/png/ZLBBRi8m4BpxAtnigP8lG0WAujQgKlY1nLxe2kSXswbAI_yTXzZ68RIgRpipkpkQzTnOqBOj5HCAZE4lnsSGXxOfK7-GGFxDk7jFHhoZR1NAddruz32LZSA8_VWX6p275Pa6h6lJSSP5t76nFKprODg_1c5hVGpDGYDOJ3HBg2H9X_rR61HxjCkwsj4-bcjIk7AA3PKOmLT8YZTT2pHcW1NqXMuBLHRr3bnMdUsm13zHjDu7R8tLpYNl3Iry-PkyLnKnhJyqQNxtPAEGijar3tPxwubZXwTZDvVCP-bjM7gdhldgUKobLYyidvxoV1066oGpFMLPEl4EEPePDdgVR8wLT7_x3000)
+
+---
+
+- sequence diagram
+  ![PlantUML model](http://www.plantuml.com/plantuml/png/RL0x3i8m3Drz2eymv0AeYYe4R4pb0fPhYQWVgdmAlJrfG2X4tMo_hrmxJzQ7eGTY_x1uNOx4NPWQiRDXWM97fV56hZiPDv7dkrWye3F3rCjwtkq12lWhk2Jx9RBP2dbPcV5avZZd1FZ0sFmy8PShfNM6HRjHdcLaLIbLX2QZLZOJDnh_9PnVmY4rhcLiuwlU)
+
+---
+
+- use case diagram
+  ![PlantUML model](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuSf9JIjHACbNACfCpoXHICaiIaqkoSpFu-9AJ2x9BrB8oo_AJSnHI2nMK7goe-55nvedU_S_dxBYHKEh4bH5SdvkGMb9QX5OpSlPkr-qBdknekFPpAQdCrSeSN61p4lCIyz9LV2jT4fCpYuj24ujAijCJbMevb800gW5kheA6a_spNtUklp5YhLFryrwjchAq_dRNopiURww-sdlvgTDCv_itgi9rW6t4AUUPtsJdg_eXkcfvN98pKi1-XK0)
